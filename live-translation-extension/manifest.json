@@ -1,0 +1,19 @@
+{
+  "name": "Streaming live translate",
+  "version": "1.0.0",
+  "description": "Get streaming translation comments easily.",
+  "manifest_version": 2,
+  "permissions": ["tabs", "https://*.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["hello.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
