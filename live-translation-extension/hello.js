@@ -99,21 +99,33 @@ const observer2 = new MutationObserver(function (mutations, me) {
     });
 });
 
+var intervalFunction;
+
 var youtubeApp = document.getElementsByTagName("ytd-app");
 console.log(youtubeApp[0]);
 if (youtubeApp != null && youtubeApp.length > 0 && document.getElementsByTagName("ytd-app")[0].attributes[0].name === "is-watch-page")
 {
-    observer2.observe(document.body.getElementsByTagName("ytd-watch-flexy")[0], {
-        attributeFilter: [ "video-id" ]
-    });
+    intervalFunction = setInterval(function () {
+        if (document.body.getElementsByTagName("ytd-watch-flexy").length > 0) {
+            clearInterval(intervalFunction);
+            observer2.observe(document.body.getElementsByTagName("ytd-watch-flexy")[0], {
+                attributeFilter: [ "video-id" ]
+            });
+        }
+    }, 500);
 }
 
 const observer = new MutationObserver(function (mutations, me) {
     if (document.getElementsByTagName("ytd-app")[0].attributes[0].name === "is-watch-page")
     {
-        observer2.observe(document.body.getElementsByTagName("ytd-watch-flexy")[0], {
-            attributeFilter: [ "video-id" ]
-        });
+        intervalFunction = setInterval(function () {
+            if (document.body.getElementsByTagName("ytd-watch-flexy").length > 0) {
+                clearInterval(intervalFunction);
+                observer2.observe(document.body.getElementsByTagName("ytd-watch-flexy")[0], {
+                    attributeFilter: [ "video-id" ]
+                });
+            }
+        }, 500);
     }
     else
     {
